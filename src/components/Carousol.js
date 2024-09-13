@@ -1,5 +1,16 @@
 import { Carousel } from "flowbite-react";
 
+/**
+ * CarouselCompound Component
+ * 
+ * Displays a carousel of images with custom navigation controls.
+ * 
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string[]} props.images - An array of image URLs to be displayed in the carousel.
+ * 
+ * @returns {JSX.Element} The CarouselCompound component.
+ */
 export function CarouselCompound({ images }) {
 
     const handleControlClick = (event) => {

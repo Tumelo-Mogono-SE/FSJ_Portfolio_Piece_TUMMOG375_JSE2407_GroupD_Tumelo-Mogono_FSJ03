@@ -2,13 +2,27 @@
 import Icon from "@/assets/online-shop.png"
 import Image from "next/image";
 
+/**
+ * NavBar Component
+ * 
+ * Displays a responsive navigation bar with a brand icon, menu items, and a toggle button for mobile views.
+ * 
+ * @component
+ * @returns {JSX.Element} The NavBar component.
+ */
 export default function NavBar() {
-  const toggleNavbar = () => {
-    const dropDown = document.getElementById("navbar-dropdown");
-    dropDown.classList.contains("hidden")
-      ? dropDown.classList.remove("hidden")
-      : dropDown.classList.add("hidden");
-  };
+
+    /**
+   * Toggles the visibility of the navbar dropdown on mobile view.
+   * 
+   * @function
+   */
+    const toggleNavbar = () => {
+        const dropDown = document.getElementById("navbar-dropdown");
+        dropDown.classList.contains("hidden")
+        ? dropDown.classList.remove("hidden")
+        : dropDown.classList.add("hidden");
+    };
 
   return (
     <header className="sticky z-50 top-0">

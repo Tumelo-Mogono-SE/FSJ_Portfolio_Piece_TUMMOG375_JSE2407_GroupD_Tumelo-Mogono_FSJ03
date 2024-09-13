@@ -2,9 +2,31 @@
 
 import { useState } from "react";
 
+
+/**
+ * PaginationComponent a client-side pagination UI element that allows users to navigate
+ * between pages. It handles previous, next, and specific page selection based on the total number of pages.
+ *
+ * @component
+ * @param {number} props.currentPage - The current active page number.
+ * @param {number} props.totalPages - The total number of available pages.
+ * @returns {JSX.Element} - JSX to render the pagination component.
+ */
 export default function PaginationComponent({ currentPage, totalPages }) {
+    /**
+     * page is the state that tracks the currently active page number.
+     * Initialized to the `currentPage` passed as a prop.
+     *
+     * @type {number}
+     */
     const [page, setPage] = useState(currentPage);
 
+    /**
+     * Handles page change when a user clicks on a page number, previous, or next buttons.
+     * Updates the URL search parameters with the new page number and sets the active page.
+     *
+     * @param {number} newPage - The new page number to navigate to.
+     */
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= totalPages) {
             setPage(newPage);
@@ -44,7 +66,7 @@ export default function PaginationComponent({ currentPage, totalPages }) {
                     type="button"
                     title={`Page ${i + 1}`}
                     onClick={() => handlePageChange(i + 1)}
-                    className={`inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md ${
+                    className={` items-center justify-center w-8 h-8 text-sm border rounded shadow-md hidden sm:block ${
                     page === i + 1
                         ? "bg-slate-800 text-white font-semibold"
                         : "bg-slate-100 hover:bg-slate-200"

@@ -1,8 +1,23 @@
 "use client"
 import { useState } from "react"
 
+/**
+ * Gallery is a client-side image gallery component that allows users to view and select 
+ * an image from a list of images. Clicking on a thumbnail updates the main displayed image.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string[]} props.images - An array of image URLs to be displayed in the gallery.
+ * @returns {JSX.Element} - JSX to render the image gallery component.
+ */
 export default function Gallery({images}){
 
+    /**
+     * selectedImage is the state that holds the currently selected image to display in the main view.
+     * Initialized to the first image in the `images` array.
+     *
+     * @type {string}
+     */
     const [ selectedImage, setSelectedImage ] = useState(images[0]);
     
 
@@ -23,16 +38,6 @@ export default function Gallery({images}){
                     }
                 </div>
                 <img src={selectedImage} alt="" className="w-full h-auto max-w-lg rounded shadow-lg object-contain" />
-                
-                {/* <img alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src="https://source.unsplash.com/random/200x200/?0" />
-                <img alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src="https://source.unsplash.com/random/200x200/?1" />
-                <img alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src="https://source.unsplash.com/random/200x200/?2" />
-                <img alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src="https://source.unsplash.com/random/200x200/?3" />
-                <img alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src="https://source.unsplash.com/random/200x200/?4" />
-                <img alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src="https://source.unsplash.com/random/200x200/?5" />
-                <img alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src="https://source.unsplash.com/random/200x200/?6" />
-                <img alt="" className="w-full h-full rounded shadow-sm min-h-48 dark:bg-gray-500 aspect-square" src="https://source.unsplash.com/random/200x200/?7" />
-                <img src="https://source.unsplash.com/random/302x302/" alt="" className="w-full h-full col-span-2 row-span-2 rounded shadow-sm min-h-96 md:col-start-1 md:row-start-3 dark:bg-gray-500 aspect-square" /> */}
             </div>
         </section>
     )
