@@ -24,7 +24,7 @@ export default function Gallery({images}){
     return(
         <section className="py-6 dark:bg-gray-100 dark:text-gray-900">
             <div className="container flex flex-col items-center md:flex-row md:items-start gap-4 p-4 mx-auto">
-            <div className="flex flex-col gap-1 md:">
+            <div className="flex flex-row gap-1 md:flex-col">
                     {
                         images.map((image, index) => (
                             <img
