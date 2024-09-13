@@ -2,6 +2,7 @@ import { fetchProducts } from "@/api/api";
 import { ProductCard } from "@/components/ProductCard";
 import PaginationComponent from "@/components/Pagination";
 import CardSkeleton from "@/components/LoaderSkeletons/CardSkeleton";
+import Error from "@/components/Error";
 
 /**
  * A Home page that fetches and displays products along with pagination.
@@ -62,7 +63,7 @@ export default async function Home({ searchParams }) {
   if (error) {
     return (
       <div className="grid justify-center mx-auto">
-        <p className="text-red-500">{error}</p>
+        <Error />
       </div>
     );
   }

@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { fetchSingleProduct } from "@/api/api";
 import ProductDetailSkeleton from "@/components/LoaderSkeletons/ProductDetailSkeleton";
+import Error from "@/components/Error";
 
 
 /**
@@ -76,7 +77,7 @@ export default function ProductPage() {
     if (error) {
         return (
             <div className="flex items-center justify-center p-2 mt-8 text-red-600">
-                {error}
+                <Error />
             </div>
         );
     }
