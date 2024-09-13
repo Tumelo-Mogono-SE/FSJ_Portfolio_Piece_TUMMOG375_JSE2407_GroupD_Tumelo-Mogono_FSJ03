@@ -1,11 +1,19 @@
 "use client";
 import Gallery from "./Gallery";
 
+/**
+ * ProductDetail Component
+ * 
+ * Displays detailed information about a product, including images, title, price, category, rating, description, tags, and customer reviews.
+ * 
+ * @component
+ * @param {Object} product - The product object containing all the product details.
+ */
 export default function ProductDetail(product) {
     const { title, description, category, price, rating, images, tags, reviews } = product;
 
     return (
-        <div className="container mx-auto my-8 p-4">
+        <div className="container mx-auto my-6 p-4">
             {/* Main Content */}
             <div className="flex flex-col lg:flex-row shadow-lg rounded-lg bg-slate-200">
                 {/* Left Section: Product Image */}
