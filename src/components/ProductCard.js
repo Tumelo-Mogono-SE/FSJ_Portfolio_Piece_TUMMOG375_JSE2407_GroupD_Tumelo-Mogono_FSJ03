@@ -5,12 +5,42 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { CarouselCompound } from "./Carousol";
 
+/**
+ * A product card component that displays a product card, including its image, title, price, rating, and category.
+ * The card links to the product's detail page.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {number} props.id - The unique ID of the product.
+ * @param {string} props.title - The title/name of the product.
+ * @param {string[]} props.images - Array of image URLs representing the product.
+ * @param {number} props.price - The price of the product.
+ * @param {number} props.rating - The rating of the product, out of 5.
+ * @param {string} props.category - The category to which the product belongs.
+ * @returns {JSX.Element} - JSX to render the product card.
+ */
 export function ProductCard({ id, title, images, price, rating, category }) {
 
+    /**
+     * The state that holds the product images, initialized as an empty array.
+     * This state will be populated with the `images` prop.
+     *
+     * @type {Array<string>}
+     */
     const [ productImage, setProductImage] = useState([]);
+
+    /**
+     * useEffect hook to update the `productImage` state whenever the `images` prop changes.
+     * It assigns the incoming `images` array to the `productImage` state.
+     */
     useEffect(() => {
+        /**
+         * A function that updates the product image state with the given image array.
+         * 
+         * @param {string[]} img - Array of image URLs.
+         */
         function getImage(img){
-          setProductImage(img);
+            setProductImage(img);
         }
     
         getImage(images)
