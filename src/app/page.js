@@ -1,12 +1,16 @@
 import { fetchProducts } from "@/api/api";
 import { ProductCard } from "@/components/ProductCard";
+import PaginationComponent from "@/components/Pagination";
 
-
-export default async function Home() {
+export default async function Home({ searchParams }) {
 
   const productsPerPage = 20;
+  const currentPage = searchParams.page ? parseInt(searchParams.page) : 1;
+  const skip = (currentPage - 1) * productsPerPage;
+  const totalPages = 10;
 
-  const products = await fetchProducts({ limit: productsPerPage, skip: 0})
+
+  const products = await fetchProducts({ limit: productsPerPage, skip})
 
   return (
     <div className="grid justify-center mx-auto">
@@ -16,6 +20,15 @@ export default async function Home() {
           <ProductCard key={product.id} {...product} />
         ))}
       </div>
+
+      {/* Pagination Component */}
+      <div className="flex justify-center my-8">
+        <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
+      </div>
+      
     </div>
   );
 }
