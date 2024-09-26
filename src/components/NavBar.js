@@ -1,6 +1,7 @@
 "use client"
 import Icon from "@/assets/online-shop.png"
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * NavBar Component
@@ -28,13 +29,15 @@ export default function NavBar() {
     <header className="sticky z-50 top-0">
       <nav className="bg-gray-500 border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <button className="flex items-center rtl:space-x-reverse">
+          <Link href="/">
+          <button className="flex items-center rtl:space-x-reverse">
               {/* <img src="@/assets/online-shop.png" className="h-8" alt="Flowbite Logo" /> */}
               <Image src={Icon} className="object-contain w-auto h-8" alt="Flowbite"/>
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
                 SwiftCart
               </span>
             </button>
+          </Link>
           <button
             onClick={toggleNavbar}
             data-collapse-toggle="navbar-default"
