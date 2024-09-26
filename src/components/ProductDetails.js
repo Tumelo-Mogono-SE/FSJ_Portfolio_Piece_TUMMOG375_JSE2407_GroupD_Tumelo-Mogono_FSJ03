@@ -1,5 +1,7 @@
 "use client";
 import Gallery from "./Gallery";
+import { useState } from "react";
+import SortReviews from "./SortReviews";
 
 /**
  * ProductDetail Component
@@ -11,6 +13,30 @@ import Gallery from "./Gallery";
  */
 export default function ProductDetail(product) {
     const { title, description, category, price, rating, images, tags, reviews } = product;
+
+    const [sortedReviews, setSortedReviews] = useState([...reviews]);
+
+    function handleSortChange(sortOption){
+        let sorted;
+        switch (sortOption) {
+            case "date":
+                sorted = [...reviews].sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+            case "date-asc":
+                sorted = [...reviews].sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+            case "rating":
+                sorted = [...reviews].sort((a, b) => b.rating - a.rating);
+                break;
+            case "rating-asc":
+                sorted = [...reviews].sort((a, b) => a.rating - b.rating);
+                break;
+            default:
+                sorted = [...reviews];
+                break;
+        }
+        setSortedReviews(sorted);
+    }
 
     return (
         <div className="container mx-auto my-6 p-4">
@@ -93,8 +119,12 @@ export default function ProductDetail(product) {
             {/* Reviews Section */}
             <div className="mt-10 shadow-lg rounded-lg bg-slate-200 p-5">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Customer Reviews</h2>
+
+                 {/* Sorting Component */}
+                <SortReviews onSortChange={handleSortChange} />
+
                 <div className="space-y-4">
-                    {reviews.map((review, index) => (
+                    {sortedReviews.map((review, index) => (
                         <div key={index} className="border-t p-4 bg-slate-300 rounded-lg">
                             <div className="my-2 flex items-center">
                                 {Array.from({ length: 5 }, (_, i) => (
