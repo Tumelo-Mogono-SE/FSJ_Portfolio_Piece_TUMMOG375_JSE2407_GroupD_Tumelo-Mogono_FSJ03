@@ -3,6 +3,10 @@ import { ProductCard } from "@/components/ProductCard";
 import PaginationComponent from "@/components/Pagination";
 import CardSkeleton from "@/components/LoaderSkeletons/CardSkeleton";
 import Error from "@/components/Error";
+import SortDropdown from "@/components/Sort";
+import Filter from "@/components/CategoryFilter";
+import Searchbar from "@/components/Search";
+import { fetchCategories } from "@/api/api";
 
 /**
  * A Home page that fetches and displays products along with pagination.
@@ -36,7 +40,13 @@ export default async function Home({ searchParams }) {
    * Total number of pages for pagination (mocked as 10 in this example).
    * @type {number}
    */
-  const totalPages = 10;
+  // const totalPages = 10;
+
+  const sortBy = searchParams.sortBy || 'id';
+  const order = searchParams.order || 'asc';
+  const selectedCategory = searchParams.category || '';
+  const searchQuery = searchParams.search || '';
+  let categories = []
 
 
   /**
@@ -44,6 +54,7 @@ export default async function Home({ searchParams }) {
    * @type {Array<Object>}
    */
   let products = []
+  let productsFromArray = []
 
   /**
    * Error message, if any, during the fetch process.
@@ -53,19 +64,23 @@ export default async function Home({ searchParams }) {
 
   try {
     // Fetch products with the specified limit and skip value
-    products = await fetchProducts({ limit: productsPerPage, skip})
+    products = await fetchProducts({ limit: productsPerPage, skip, category: selectedCategory, sortBy, order, search: searchQuery })
+    productsFromArray = await fetchProducts({limit: 1000 , skip: 0, category: selectedCategory, sortBy, order, search: searchQuery })
+
+    categories = await fetchCategories();
   } catch (error) {
     // If fetching fails, set an error message
     error = "Failed to load products. Please try again later."
   }
 
+
+  let productsLength = productsFromArray.length
+  console.log(productsLength)
+  let totalPages = Math.ceil(productsLength / productsPerPage)
+
   // If there is an error, display the error message
   if (error) {
-    return (
-      <div className="grid justify-center mx-auto">
-        <Error />
-      </div>
-    );
+    throw error
   }
 
   // If products are still loading, display skeleton loaders
@@ -83,23 +98,33 @@ export default async function Home({ searchParams }) {
 
   // If products are fetched successfully, I display them
   return (
-    <div className="grid justify-center mx-auto">
-      {/* Product Grid */}
-      <div className="lg: max-w-xl mx-4 grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
-        {products.map((product) => (
-          <ProductCard key={product.id} {...product} />
-        ))}
+    <>
+      <div className="grid lg:flex  lg:items-start  mt-3 mx-auto justify-center">
+        <Searchbar />
       </div>
+      <div className="grid lg:flex gap-y-4 gap-x-48 lg:justify-evenly lg:mx-auto  mt-3 mx-auto justify-center">
+        <SortDropdown />
+        <Filter categories={categories} selectedCategory={selectedCategory} />
+      </div>
+      <div className="grid justify-center mx-auto">
+        {/* Product Grid */}
+        <div className="lg: max-w-xl mx-4 grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
+          {products.map((product) => (
+            <ProductCard key={product.id} {...product} />
+          ))}
+        </div>
 
-      {/* Pagination Component */}
-      <div className="flex justify-center my-8">
-        <PaginationComponent
-          currentPage={currentPage}
-          totalPages={totalPages}
-        />
-      </div>
+        {/* Pagination Component */}
+        <div className="flex justify-center my-8">
+          <PaginationComponent
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        </div>
 
     </div>
+    </>
+    
   );
 }
 
