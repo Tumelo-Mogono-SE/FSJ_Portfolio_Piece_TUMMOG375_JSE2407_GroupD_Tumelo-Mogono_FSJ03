@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 
 /**
@@ -20,6 +21,8 @@ export default function PaginationComponent({ currentPage, totalPages }) {
      * @type {number}
      */
     const [page, setPage] = useState(currentPage);
+    const router = useRouter();
+    const searchParams = useSearchParams();
 
     /**
      * Handles page change when a user clicks on a page number, previous, or next buttons.
@@ -30,7 +33,18 @@ export default function PaginationComponent({ currentPage, totalPages }) {
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= totalPages) {
             setPage(newPage);
-            window.location.search = `?page=${newPage}`;
+
+            const currentQuery = Object.fromEntries(searchParams.entries());
+
+            const newQuery = {
+                ...currentQuery,
+                page: newPage,
+            }
+
+            const queryString = new URLSearchParams(newQuery).toString();
+            router.push(`?${queryString}`)
+
+            // window.location.search = `?page=${newPage}`;
         }
     };
 
