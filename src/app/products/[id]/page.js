@@ -75,11 +75,7 @@ export default function ProductPage() {
 
     // Display error message if an error occurred
     if (error) {
-        return (
-            <div className="flex items-center justify-center p-2 mt-8 text-red-600">
-                <Error />
-            </div>
-        );
+        throw error;
     }
 
     // Display product details once the product data is loaded
