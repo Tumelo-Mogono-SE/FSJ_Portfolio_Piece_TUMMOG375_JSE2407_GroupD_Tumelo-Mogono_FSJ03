@@ -2,18 +2,35 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
+/**
+ * SortDropdown component that allows users to sort products based on selected criteria.
+ * The sorting options are reflected in the URL query parameters and trigger a navigation update.
+ *
+ * @component
+ * @returns {JSX.Element} A dropdown to select and apply sorting options.
+ */
 export default function SortDropdown() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
     const [selectedSort, setSelectedSort] = useState("id-asc");
 
+    /**
+   * useEffect hook that synchronizes the selected sorting option with the current URL parameters.
+   * Updates the local state whenever the query parameters in the URL change.
+   */
     useEffect(() => {
         const sortBy = searchParams.get("sortBy") || "id";
         const order = searchParams.get("order") || "asc";
         setSelectedSort(`${sortBy}-${order}`);
     },[searchParams])
 
+    /**
+   * Updates the URL with new sorting parameters and resets the page number to 1.
+   *
+   * @param {string} sortBy - The field by which to sort (e.g., "price", "id").
+   * @param {string} order - The sort order (either "asc" or "desc").
+   */
     const handleSort = (sortBy, order) => {
     const newQuery = new URLSearchParams(window.location.search); // Get the current URL query parameters
     newQuery.set('sortBy', sortBy); 

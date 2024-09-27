@@ -53,14 +53,24 @@ export default async function Home({ searchParams }) {
   const order = searchParams.order || 'asc';
   const selectedCategory = searchParams.category || '';
   const searchQuery = searchParams.search || '';
+
+  /**
+   * Array to store available categories.
+   * @type {Array<string>}
+   */
   let categories = []
 
 
   /**
-   * Array to store fetched products.
+   * Array to store fetched products for the current page..
    * @type {Array<Object>}
    */
   let products = []
+
+  /**
+   * Array to store all fetched products for determining total number of pages.
+   * @type {Array<Object>}
+   */
   let productsFromArray = []
 
   /**
@@ -72,8 +82,10 @@ export default async function Home({ searchParams }) {
   try {
     // Fetch products with the specified limit and skip value
     products = await fetchProducts({ limit: productsPerPage, skip, category: selectedCategory, sortBy, order, search: searchQuery })
+     // Fetch all products to calculate total number of pages
     productsFromArray = await fetchProducts({limit: 1000 , skip: 0, category: selectedCategory, sortBy, order, search: searchQuery })
 
+    // Fetch categories
     categories = await fetchCategories();
   } catch (error) {
     // If fetching fails, set an error message
@@ -81,8 +93,17 @@ export default async function Home({ searchParams }) {
   }
 
 
+  /**
+   * Total number of products fetched to calculate pagination.
+   * @type {number}
+   */
   let productsLength = productsFromArray.length
   console.log(productsLength)
+
+  /**
+   * Total number of pages for pagination.
+   * @type {number}
+   */
   let totalPages = Math.ceil(productsLength / productsPerPage)
 
   // If there is an error, display the error message

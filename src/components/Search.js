@@ -2,10 +2,24 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
+/**
+ * Searchbar component allows users to search for products by entering a query.
+ * When the form is submitted, the page navigates to the home page with the search query
+ * passed as a URL parameter.
+ *
+ * @component
+ * @returns {JSX.Element} A search bar with an input field and a submit button.
+ */
 export default function Searchbar() {
     const [query, setQuery] = useState('')
     const router = useRouter();
 
+    /**
+   * Handles the search submission.
+   * Encodes the search query and updates the URL with the search parameter.
+   *
+   * @param {Event} e - The form submission event.
+   */
     function handleSearch (e) {
         e.preventDefault();
         router.push(`/?search=${encodeURIComponent(query)}`)

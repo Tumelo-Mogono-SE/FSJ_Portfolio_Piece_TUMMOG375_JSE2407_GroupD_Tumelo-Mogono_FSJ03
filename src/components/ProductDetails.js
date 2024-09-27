@@ -16,6 +16,11 @@ export default function ProductDetail(product) {
 
     const [sortedReviews, setSortedReviews] = useState([...reviews]);
 
+    /**
+     * Sort reviews based on the selected sort option.
+     * 
+     * @param {string} sortOption - The option by which reviews should be sorted.
+     */
     function handleSortChange(sortOption){
         let sorted;
         switch (sortOption) {

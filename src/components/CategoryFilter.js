@@ -1,24 +1,46 @@
 "use client";
 import { useRouter } from "next/navigation";
 
+/**
+ * Filter Component
+ * 
+ * This component renders a dropdown filter for categories. It updates the URL query parameters 
+ * when a category is selected and shows the selected category in the button.
+ * 
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Array<string>} props.categories - The list of available categories.
+ * @param {string} props.selectedCategory - The currently selected category.
+ * 
+ * @returns {JSX.Element} The rendered filter component.
+ */
 export default function Filter({ categories, selectedCategory }) {
     const router = useRouter();
 
+    /**
+     * Toggles the visibility of the dropdown menu.
+     */
     const toggleDropdown = () => {
     const dropDown = document.getElementById("dropdown");
     dropDown.classList.toggle("hidden");
     };
 
+    /**
+     * Handles filtering by the selected category.
+     * Updates the URL query parameters to reflect the selected category and resets the page to 1.
+     * 
+     * @param {string} category - The selected category to filter by.
+     */
     const handleFilter = (category) => {
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set("category", category);
-    searchParams.set("page", "1");
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set("category", category);
+        searchParams.set("page", "1");
 
-    // Update the URL with the selected category
-    router.push(`?${searchParams.toString()}`);
-    
-    // Close the dropdown
-    toggleDropdown();
+        // Update the URL with the selected category
+        router.push(`?${searchParams.toString()}`);
+        
+        // Close the dropdown
+        toggleDropdown();
     };
 
     return (

@@ -4,7 +4,14 @@ import Error from "@/components/Error";
 import { fetchSingleProduct } from "@/api/api";
 import GoBackButton from "@/components/GoBackButton";
 
-
+/**
+ * Generates metadata for the product detail page based on the product ID.
+ * Fetches the product details and returns the metadata for SEO and social sharing.
+ *
+ * @param {Object} params - The parameters from the URL.
+ * 
+ * @returns {Object} Metadata object containing title, description, and Open Graph data.
+ */
 export async function generateMetadata({ params }) {
     const { id } = params;
     const product = await fetchSingleProduct(id);
@@ -26,6 +33,7 @@ export async function generateMetadata({ params }) {
  * Fetches product details based on the product ID from the URL and displays them.
  * Includes a "Go back" button to return to the previous page.
  *
+ * @param {Object} props - Component properties.
  * @returns {JSX.Element} The product detail page with loading and error handling.
  */
 export default async function ProductPage({ params }) {

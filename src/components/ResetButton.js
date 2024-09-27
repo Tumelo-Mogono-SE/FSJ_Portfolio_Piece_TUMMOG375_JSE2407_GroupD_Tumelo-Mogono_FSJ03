@@ -17,7 +17,10 @@ export default function ResetButton({ search, sortBy, order, category }) {
     const router = useRouter();
     const [showButton, setShowButton] = useState(false);
 
-    // Check if any filters are applied
+    /**
+   * Effect hook that determines whether to show the reset button.
+   * The button is displayed if there are active search, sorting, or category filters.
+   */
     useEffect(() => {
         if (search || sortBy !== 'id' || order !== 'asc' || category) {
             setShowButton(true);
@@ -26,11 +29,14 @@ export default function ResetButton({ search, sortBy, order, category }) {
         }
     }, [search, sortBy, order, category]);
 
-    // Reset all filters, sorting, and search parameters
+    /**
+   * Resets all applied filters, sorting, and search parameters by navigating to the default route.
+   */
     const handleReset = () => {
         router.replace('/');
     };
 
+    // If no filters or sorting options are active, do not render the button
     if (!showButton) return null;
 
     return (
