@@ -22,7 +22,7 @@ export default function Searchbar() {
             />
             <button
                 type="submit"
-                className="px-6 py-2 text-white bg-cyan-700 hover:bg-gray-600 rounder-r-md shadow-md transition-all duration-300"
+                className="px-6 py-2 text-white bg-cyan-700 hover:bg-gray-600 rounded-r-md shadow-md transition-all duration-300"
             >
                 Search
             </button>

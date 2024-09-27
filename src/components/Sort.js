@@ -25,8 +25,8 @@ export default function SortDropdown() {
     };
 
     return (
-    <div className="flex sm:w-[95%] max-w-[21rem] md:w-full">
-        <label htmlFor="sort" className="w-20 my-auto font-semibold">
+    <div className="inline-flex items-center divide-x  bg-cyan-700 text-gray-100 divide-gray-300 rounded-lg mt-2">
+        <label htmlFor="sort" className="px-2 py-1 font-semibold">
             Sort by:{" "}
         </label>
         <select
@@ -37,7 +37,7 @@ export default function SortDropdown() {
                 handleSort(sortBy, order);
                 setSelectedSort(e.target.value);
             }}
-            className="p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+            className="p-3 bg-cyan-700 text-white font-semibold rounded-r-lg focus:outline-none"
         >
         <option value="id-asc">Default</option>
         <option value="price-asc">Price Low to High</option>

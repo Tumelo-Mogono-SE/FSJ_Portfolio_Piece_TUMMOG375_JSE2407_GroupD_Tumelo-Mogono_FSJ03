@@ -22,13 +22,13 @@ export default function Filter({ categories, selectedCategory }) {
     };
 
     return (
-    <form>
+    <form >
         <div className="flex w-full md:w-auto md:mb-0 relative">
         <button
             onClick={toggleDropdown}
             id="dropdown-button"
             data-dropdown-toggle="dropdown"
-            className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 "
+            className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4  font-semibold text-center text-gray-100 bg-cyan-700 border border-cyan-700 rounded-lg hover:bg-cyan-900 "
             type="button"
         >
             {selectedCategory || "All categories"}

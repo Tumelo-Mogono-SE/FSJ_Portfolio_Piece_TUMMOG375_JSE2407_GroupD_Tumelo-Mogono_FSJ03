@@ -114,7 +114,7 @@ export default async function Home({ searchParams }) {
           <div className="grid lg:flex  lg:items-start  mt-3 mx-auto justify-center">
             <Searchbar />
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 ">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mx-4">
             <SortDropdown />
             <Filter categories={categories} selectedCategory={selectedCategory} />
           </div>

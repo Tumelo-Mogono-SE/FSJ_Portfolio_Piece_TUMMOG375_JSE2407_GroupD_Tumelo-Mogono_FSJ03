@@ -36,7 +36,7 @@ export default function ResetButton({ search, sortBy, order, category }) {
     return (
         <button
             onClick={handleReset}
-            className="px-4 py-2 mt-4 font-semibold text-white bg-red-500 rounded hover:bg-red-600"
+            className="px-2 py-1 mt-2 font-semibold text-white bg-red-500 rounded hover:bg-red-600"
         >
             Reset Filters & Sorting
         </button>
