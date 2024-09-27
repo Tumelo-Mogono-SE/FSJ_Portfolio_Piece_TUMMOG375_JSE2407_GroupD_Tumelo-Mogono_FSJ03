@@ -2,11 +2,18 @@ import { fetchProducts } from "@/api/api";
 import { ProductCard } from "@/components/ProductCard";
 import PaginationComponent from "@/components/Pagination";
 import CardSkeleton from "@/components/LoaderSkeletons/CardSkeleton";
-import Error from "@/components/Error";
 import SortDropdown from "@/components/Sort";
 import Filter from "@/components/CategoryFilter";
 import Searchbar from "@/components/Search";
 import { fetchCategories } from "@/api/api";
+import ResetButton from "@/components/ResetButton";
+
+export const metadata = {
+  title: "SwiftCart E-commerce Store",
+  description: "Welcome to our e-commerce store, offering great products.",
+  keywords: "e-commerce, products, buy online, shopping",
+};
+
 
 /**
  * A Home page that fetches and displays products along with pagination.
@@ -99,14 +106,28 @@ export default async function Home({ searchParams }) {
   // If products are fetched successfully, I display them
   return (
     <>
-      <div className="grid lg:flex  lg:items-start  mt-3 mx-auto justify-center">
-        <Searchbar />
-      </div>
-      <div className="grid lg:flex gap-y-4 gap-x-48 lg:justify-evenly lg:mx-auto  mt-3 mx-auto justify-center">
-        <SortDropdown />
-        <Filter categories={categories} selectedCategory={selectedCategory} />
-      </div>
+      
+
       <div className="grid justify-center mx-auto">
+
+        <div>
+          <div className="grid lg:flex  lg:items-start  mt-3 mx-auto justify-center">
+            <Searchbar />
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 ">
+            <SortDropdown />
+            <Filter categories={categories} selectedCategory={selectedCategory} />
+          </div>
+          <div className="flex justify-end my-4 mx-4">
+            <ResetButton
+              search={searchQuery}
+              sortBy={sortBy}
+              order={order}
+              category={selectedCategory}
+            />
+          </div>
+        </div>
+
         {/* Product Grid */}
         <div className="lg: max-w-xl mx-4 grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
           {products.map((product) => (
