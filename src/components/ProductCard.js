@@ -60,7 +60,7 @@ export function ProductCard({ id, title, images, price, rating, category }) {
                             <Image 
                                 src={images[0]}
                                 alt="title"
-                                layout="fill"
+                                fill
                                 style={{ objectFit: 'contain'}}
                                 className="object-contain"
                             />
