@@ -1,8 +1,18 @@
 "use client"
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function SortDropdown() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const [selectedSort, setSelectedSort] = useState("id-asc");
+
+    useEffect(() => {
+        const sortBy = searchParams.get("sortBy") || "id";
+        const order = searchParams.get("order") || "asc";
+        setSelectedSort(`${sortBy}-${order}`);
+    },[searchParams])
 
     const handleSort = (sortBy, order) => {
     const newQuery = new URLSearchParams(window.location.search); // Get the current URL query parameters
@@ -21,9 +31,11 @@ export default function SortDropdown() {
         </label>
         <select
             id="sort"
+            value={selectedSort}
             onChange={(e) => {
                 const [sortBy, order] = e.target.value.split("-");
                 handleSort(sortBy, order);
+                setSelectedSort(e.target.value);
             }}
             className="p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
         >
