@@ -1,4 +1,5 @@
 import { Carousel } from "flowbite-react";
+import Image from "next/image";
 
 /**
  * CarouselCompound Component
@@ -43,12 +44,16 @@ export function CarouselCompound({ images }) {
                 }
             >
                 {images.map((image, index) => (
-                    <img
-                        key={index}
-                        src={image}
-                        alt={`Product image ${index + 1}`}
-                        className="object-contain w-full h-full"
-                    />
+                    <div className="relative w-full h-full" key={index}>
+                        <Image
+                            key={index}
+                            src={image}
+                            alt={`Product image ${index + 1}`}
+                            className="object-contain w-full h-full"
+                            style={{ objectFit: 'contain'}}
+                            layout="fill"
+                        />
+                    </div>
                 ))}
             </Carousel>
         </div>
