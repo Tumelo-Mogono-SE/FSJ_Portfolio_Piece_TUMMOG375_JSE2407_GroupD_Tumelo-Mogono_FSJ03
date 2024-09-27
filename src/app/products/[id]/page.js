@@ -1,11 +1,25 @@
-'use client';
 import ProductDetail from "@/components/ProductDetails";
-import { useParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { fetchSingleProduct } from "@/api/api";
 import ProductDetailSkeleton from "@/components/LoaderSkeletons/ProductDetailSkeleton";
 import Error from "@/components/Error";
+import { fetchSingleProduct } from "@/api/api";
+import GoBackButton from "@/components/GoBackButton";
 
+
+export async function generateMetadata({ params }) {
+    const { id } = params;
+    const product = await fetchSingleProduct(id);
+    return {
+        title: `${product.title} | Swift Cart`,
+        description: product.description,
+        openGraph: {
+        title: `${product.title} | Swift Cart`,
+        description: product.description,
+        // images: [
+        //     { url: product.images[0], width: 800, height: 600, alt: `${product.title} | Swift Cart` },
+        // ],
+        },
+    };
+}
 
 /**
  * Renders the Product Detail page.
@@ -14,55 +28,24 @@ import Error from "@/components/Error";
  *
  * @returns {JSX.Element} The product detail page with loading and error handling.
  */
-export default function ProductPage() {
-    // State to store the product data
-    const [product, setProduct] = useState(null);  
-    // State to track loading status
-    const [loading, setLoading] = useState(true);
-    // State to track errors
-    const [error, setError] = useState(null);
-
+export default async function ProductPage({ params }) {
     // Extracts the product ID from the URL parameters
-    const { id } = useParams();
-    const router = useRouter();
+    const { id } = params;
+    let product;
+    let loading = true;
+    let error = null;
 
-    /**
-   * Fetches a single product by ID and sets the product state.
-   * Also handles loading and error states.
-   *
-   * @async
-   * @function getSingleProduct
-   * @param {string} id - The ID of the product to fetch.
-   * @returns {Promise<void>}
-   */   
-    useEffect(() => {
-        async function getSingleProduct(id) {
-            try {
-            setLoading(true);
-            const productData = await fetchSingleProduct(id);
-            setProduct(productData); 
-            setError(null); 
-            } catch (err) {
-            setError("Failed to load product details."); 
-            } finally {
-            setLoading(false); 
-            }
+    try {
+        product = await fetchSingleProduct(id);
+        if (!product) {
+            // Redirect if product is not found (handled at the routing level)
+            throw new Error('Failed to fetch products')
         }
-        
-        // Only fetch if ID is available
-        if (id) {
-            getSingleProduct(id);
-        }
-    }, [id]);
-
-
-    /**
-   * Handles the "Go back" button click by returning to the previous page.
-   */
-    const handleBackButton = () => {
-        router.back();
+    } catch (err) {
+        error = "Failed to load product details.";
+    } finally {
+        loading = false;
     }
-
 
     // Display loading state using the skeleton loader
     if (loading) {
@@ -73,15 +56,15 @@ export default function ProductPage() {
         );
     }
 
-    // Display error message if an error occurred
+     // Display error message if an error occurred
     if (error) {
-        throw error;
+        throw error
     }
 
     // Display product details once the product data is loaded
     return (
         <div>
-            <button onClick={handleBackButton} className="mt-4 mx-4 px-6 py-3 bg-gray-400 text-white rounded hover:bg-gray-500">&larr; Go back</button>
+            <GoBackButton />
             <ProductDetail {...product} />
         </div>
     );
