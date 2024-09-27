@@ -23,7 +23,7 @@ export default function Filter({ categories, selectedCategory }) {
 
     return (
     <form>
-        <div className="flex lg:w-[31.25rem] sm:w-[95%] md:w-full relative">
+        <div className="flex w-full md:w-auto md:mb-0 relative">
         <button
             onClick={toggleDropdown}
             id="dropdown-button"
