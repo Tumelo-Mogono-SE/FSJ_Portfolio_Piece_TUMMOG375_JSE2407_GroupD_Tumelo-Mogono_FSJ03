@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useEffect } from "react";
 import { CarouselCompound } from "./Carousol";
+import Image from "next/image";
 
 /**
  * A product card component that displays a product card, including its image, title, price, rating, and category.
@@ -52,7 +53,20 @@ export function ProductCard({ id, title, images, price, rating, category }) {
             <div className="max-w-xs w-80 bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
             {/* Image Container */}
                 <div className="w-full h-52 bg-gray-200 flex items-center justify-center">
-                    {productImage.length > 1 ? <CarouselCompound images={productImage} /> : <img src={images[0]} alt={title} className="object-contain h-full w-full" /> }
+                    {productImage.length > 1 ? ( 
+                        <CarouselCompound images={productImage} /> 
+                    ) : ( 
+                        <div className="relative w-full h-full">
+                            <Image 
+                                src={images[0]}
+                                alt="title"
+                                layout="fill"
+                                style={{ objectFit: 'contain'}}
+                                className="object-contain"
+                            />
+                        </div>
+                        // <img src={images[0]} alt={title} className="object-contain h-full w-full" /> 
+                    )}
                 </div>
 
                 {/* Card Content */}
