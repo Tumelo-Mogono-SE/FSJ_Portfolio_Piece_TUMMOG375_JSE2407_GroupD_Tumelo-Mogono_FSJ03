@@ -53,6 +53,7 @@ export default async function Home({ searchParams }) {
   const order = searchParams.order || 'asc';
   const selectedCategory = searchParams.category || '';
   const searchQuery = searchParams.search || '';
+  let lastProductId = searchParams.lastProductId || null;
 
   /**
    * Array to store available categories.
@@ -73,6 +74,12 @@ export default async function Home({ searchParams }) {
    */
   let productsFromArray = []
 
+  let lastProductIds = [];
+
+  if (productsFromArray.length === 0) {
+    productsFromArray = await fetchProducts({ limit: 1000, category: selectedCategory, sortBy, order, search: searchQuery });
+  }
+
   /**
    * Error message, if any, during the fetch process.
    * @type {string|null}
@@ -80,14 +87,29 @@ export default async function Home({ searchParams }) {
   let error = null;
 
   try {
+
+    // // Fetch all products to calculate total number of pages
+    // productsFromArray = await fetchProducts({limit: 1000 , skip: 0, category: selectedCategory, sortBy, order, search: searchQuery })
+
+    // Calculate lastProductId for each page
+    for (let i = 0; i < productsFromArray.length; i += productsPerPage) {
+      const lastProductInPage = productsFromArray[Math.min(i + productsPerPage - 1, productsFromArray.length - 1)];
+      lastProductIds.push(lastProductInPage.id); // store lastProductId for each page
+    }
+
+    // Get the correct lastProductId for the previous page if we're on page > 1
+    if (currentPage > 1) {
+      lastProductId = lastProductIds[currentPage - 2]; // get the lastProductId from the previous page
+    }
+
     // Fetch products with the specified limit and skip value
-    products = await fetchProducts({ limit: productsPerPage, skip, category: selectedCategory, sortBy, order, search: searchQuery })
-     // Fetch all products to calculate total number of pages
-    productsFromArray = await fetchProducts({limit: 1000 , skip: 0, category: selectedCategory, sortBy, order, search: searchQuery })
+    products = await fetchProducts({ limit: productsPerPage, lastProductId, category: selectedCategory, sortBy, order, search: searchQuery })
+    
 
     // Fetch categories
     categories = await fetchCategories();
   } catch (error) {
+    console.error("Error fetching products:", error);
     // If fetching fails, set an error message
     error = "Failed to load products. Please try again later."
   }
@@ -150,7 +172,7 @@ export default async function Home({ searchParams }) {
         </div>
 
         {/* Product Grid */}
-        <div className="lg: max-w-xl mx-4 grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
+        <div className="lg: max-w-xl mx-4 grid gap-4 grid-cols-1 lg:grid-cols-4 md:gap-4 md:grid-cols-2 md:mx-1 items-center lg:max-w-none my-4">
           {products.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
@@ -161,6 +183,7 @@ export default async function Home({ searchParams }) {
           <PaginationComponent
             currentPage={currentPage}
             totalPages={totalPages}
+            lastProductIds={lastProductIds}
           />
         </div>
 
