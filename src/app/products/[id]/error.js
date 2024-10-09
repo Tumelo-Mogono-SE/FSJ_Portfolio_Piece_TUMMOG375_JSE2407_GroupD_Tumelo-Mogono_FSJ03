@@ -15,7 +15,7 @@ export default function Error({ error, reset }) {
                         <span className="sr-only">Error</span>Oops!
                     </h2>
                     <p className="text-2xl font-semibold md:text-3xl">Something went wrong with this product!</p>
-                    <p className="mt-4 mb-8 text-gray-600">Don't worry, try refreshing or return to the homepage.</p>
+                    <p className="mt-4 mb-8 text-gray-600">Don not worry, try refreshing or return to the homepage.</p>
                     <div className="flex space-x-4">
                         <button
                             onClick={() => reset()}
