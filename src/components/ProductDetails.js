@@ -164,6 +164,22 @@ export default function ProductDetail(product) {
                                 <span className="ml-2 text-gray-600">by {new Date(review.date).toLocaleString()}</span>
                             </div>
                             <p className="text-gray-700">{review.comment}</p>
+                            {user && (
+                                <div className="flex space-x-2 mt-2">
+                                    <button
+                                        onClick={() => router.push(`/products/${id}/reviews?${index}`)}
+                                        className="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => router.push(`/products/${id}/reviews?${index}`)}
+                                        className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
