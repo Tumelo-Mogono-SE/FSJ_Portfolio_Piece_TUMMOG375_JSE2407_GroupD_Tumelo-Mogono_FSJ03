@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
      * @function signOut
      * @returns {Promise<void>} - A promise that resolves when the user is signed out.
      */
-    const signOut = () => firebaseSignOut(getAuth(app));
+    const signOut = () => firebaseSignOut(auth);
 
     return (
         <AuthContext.Provider value={{ user, signOut }}>
