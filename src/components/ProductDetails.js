@@ -2,6 +2,7 @@
 import Gallery from "./Gallery";
 import { useState } from "react";
 import SortReviews from "./SortReviews";
+import { useRouter } from "next/navigation";
 
 /**
  * ProductDetail Component
@@ -12,6 +13,7 @@ import SortReviews from "./SortReviews";
  * @param {Object} product - The product object containing all the product details.
  */
 export default function ProductDetail(product) {
+    const router = useRouter();
     const { title, description, category, price, rating, images, tags, reviews } = product;
 
     const [sortedReviews, setSortedReviews] = useState([...reviews]);
@@ -127,6 +129,13 @@ export default function ProductDetail(product) {
 
                  {/* Sorting Component */}
                 <SortReviews onSortChange={handleSortChange} />
+
+                <button
+                    onClick={() => router.push(`/products/${id}/reviews`)}
+                    className="ml-4 mx-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg"
+                >
+                    Add a Review
+                </button>
 
                 <div className="space-y-4">
                     {sortedReviews.map((review, index) => (
