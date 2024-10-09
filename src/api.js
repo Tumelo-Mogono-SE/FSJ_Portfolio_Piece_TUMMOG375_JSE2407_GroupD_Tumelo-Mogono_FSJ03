@@ -1,3 +1,5 @@
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 /**
  * Fetches a list of products with optional pagination.
  * 
@@ -18,7 +20,9 @@ export async function fetchProducts ({limit = 20, lastProductId, category, sortB
     }).toString();
 
     try{
-        const response = await fetch (`http://localhost:3000/api/products?${query}`)
+        const response = await fetch (`${apiUrl}/api/products?${query}`, {
+            cache: 'force-cache',
+        })
         if (!response.ok){
             throw new Error('Failed to fetch products')
         }
@@ -38,7 +42,7 @@ export async function fetchProducts ({limit = 20, lastProductId, category, sortB
  */
 export async function fetchSingleProduct(productId) {
     try{
-        const response = await fetch(`hhttp://localhost:3000/api/products/${productId}`, {
+        const response = await fetch(`${apiUrl}/api/products/${productId}`, {
             cache: 'no-store'
         })
         if(!response.ok){
@@ -53,7 +57,7 @@ export async function fetchSingleProduct(productId) {
 }
 
 export async function fetchCategories(){
-    const response = await fetch("http://localhost:3000/api/categories", {
+    const response = await fetch(`${apiUrl}/api/categories`, {
         cache: 'force-cache',
     });
     const data = await response.json();
