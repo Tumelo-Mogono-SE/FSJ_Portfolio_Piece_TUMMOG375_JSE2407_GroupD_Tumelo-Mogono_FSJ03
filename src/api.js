@@ -18,7 +18,7 @@ export async function fetchProducts ({limit = 20, skip = 0, category, sortBy, or
     }).toString();
 
     try{
-        const response = await fetch (`https://swiftcart-store-hhj51h8a1-tumelo-mogonos-projects.vercel.app/api/products?${query}`)
+        const response = await fetch (`http://localhost:3000/api/products?${query}`)
         if (!response.ok){
             throw new Error('Failed to fetch products')
         }
@@ -38,7 +38,7 @@ export async function fetchProducts ({limit = 20, skip = 0, category, sortBy, or
  */
 export async function fetchSingleProduct(productId) {
     try{
-        const response = await fetch(`https://swiftcart-store-hhj51h8a1-tumelo-mogonos-projects.vercel.app/api/products/${productId}`, {
+        const response = await fetch(`hhttp://localhost:3000/api/products/${productId}`, {
             cache: 'no-store'
         })
         if(!response.ok){
@@ -53,7 +53,7 @@ export async function fetchSingleProduct(productId) {
 }
 
 export async function fetchCategories(){
-    const response = await fetch("https://swiftcart-store-hhj51h8a1-tumelo-mogonos-projects.vercel.app/api/categories", {
+    const response = await fetch("http://localhost:3000/api/categories", {
         cache: 'force-cache',
     });
     const data = await response.json();
