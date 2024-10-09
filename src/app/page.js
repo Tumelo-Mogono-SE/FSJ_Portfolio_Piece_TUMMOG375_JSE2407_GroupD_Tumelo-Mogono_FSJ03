@@ -1,11 +1,11 @@
-import { fetchProducts } from "@/api/api";
+import { fetchProducts } from "@/api";
 import { ProductCard } from "@/components/ProductCard";
 import PaginationComponent from "@/components/Pagination";
 import CardSkeleton from "@/components/LoaderSkeletons/CardSkeleton";
 import SortDropdown from "@/components/Sort";
 import Filter from "@/components/CategoryFilter";
 import Searchbar from "@/components/Search";
-import { fetchCategories } from "@/api/api";
+import { fetchCategories } from "@/api";
 import ResetButton from "@/components/ResetButton";
 
 export const metadata = {

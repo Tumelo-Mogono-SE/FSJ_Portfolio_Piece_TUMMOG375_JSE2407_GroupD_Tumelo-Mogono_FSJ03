@@ -1,7 +1,7 @@
 import ProductDetail from "@/components/ProductDetails";
 import ProductDetailSkeleton from "@/components/LoaderSkeletons/ProductDetailSkeleton";
 import Error from "@/components/Error";
-import { fetchSingleProduct } from "@/api/api";
+import { fetchSingleProduct } from "@/api";
 import GoBackButton from "@/components/GoBackButton";
 
 /**
