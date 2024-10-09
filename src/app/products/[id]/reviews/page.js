@@ -15,7 +15,7 @@ export default function ReviewsPage() {
     const router = useRouter();
     const params = useParams(); // Get dynamic route parameters
     const { id } = params; // Extract product ID
-    const index = router.query.index; // Extract review index
+    const index = router.query; // Extract review index
 
     // Check if the user is authenticated
     useEffect(() => {

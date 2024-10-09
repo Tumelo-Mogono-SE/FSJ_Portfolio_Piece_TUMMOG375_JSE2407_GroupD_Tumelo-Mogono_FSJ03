@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
  */
 export default function ProductDetail(product) {
     const router = useRouter();
-    const { title, description, category, price, rating, images, tags, reviews } = product;
+    const { title, id, description, category, price, rating, images, tags, reviews } = product;
 
     const [sortedReviews, setSortedReviews] = useState([...reviews]);
 
@@ -164,7 +164,7 @@ export default function ProductDetail(product) {
                                 <span className="ml-2 text-gray-600">by {new Date(review.date).toLocaleString()}</span>
                             </div>
                             <p className="text-gray-700">{review.comment}</p>
-                            {user && (
+                            
                                 <div className="flex space-x-2 mt-2">
                                     <button
                                         onClick={() => router.push(`/products/${id}/reviews?${index}`)}
@@ -179,7 +179,7 @@ export default function ProductDetail(product) {
                                         Delete
                                     </button>
                                 </div>
-                            )}
+                        
                         </div>
                     ))}
                 </div>
