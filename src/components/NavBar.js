@@ -2,6 +2,7 @@
 import Icon from "@/assets/online-shop.png"
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "@/app/context/authContext";
 
 /**
  * NavBar Component
@@ -12,6 +13,8 @@ import Link from "next/link";
  * @returns {JSX.Element} The NavBar component.
  */
 export default function NavBar() {
+
+  const { user, signOut} = useAuth();
 
     /**
    * Toggles the visibility of the navbar dropdown on mobile view.
@@ -98,9 +101,23 @@ export default function NavBar() {
                   Cart
               </li>
 
-              <li  className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">
-                  Login
-              </li>
+              {user ? (
+                <li
+                  onClick={signOut}
+                  className="block py-2 px-3 text-white cursor-pointer"
+                >
+                  Sign Out
+                </li>
+              ) : (
+                <>
+                  <li className="block py-2 px-3 text-white">
+                    <Link href="/login">Login</Link>
+                  </li>
+                  <li className="block py-2 px-3 text-white">
+                    <Link href="/signup">Sign Up</Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
