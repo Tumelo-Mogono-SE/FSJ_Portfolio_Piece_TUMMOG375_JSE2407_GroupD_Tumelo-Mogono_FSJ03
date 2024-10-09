@@ -7,7 +7,7 @@ The aim of this project is to build a e-commerce store using Next.js, utilizing 
 
 The project was built using the Next.js thus to run the project you will first need to install the node modules running npm install. Then you can run the code using npm run dev.
 
-Deployed Link : ![SwiftCart E-commerce store](https://swiftcart-store-ten.vercel.app/)
+Deployed Link : https://swiftcart-store-ten.vercel.app/
 
 # Tech Stack 
 * HTML
