@@ -13,7 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
  * @param {number} props.totalPages - The total number of available pages.
  * @returns {JSX.Element} - JSX to render the pagination component.
  */
-export default function PaginationComponent({ currentPage, totalPages }) {
+export default function PaginationComponent({ currentPage, totalPages, lastProductIds }) {
     /**
      * page is the state that tracks the currently active page number.
      * Initialized to the `currentPage` passed as a prop.
@@ -35,10 +35,12 @@ export default function PaginationComponent({ currentPage, totalPages }) {
             setPage(newPage);
 
             const currentQuery = Object.fromEntries(searchParams.entries());
+            const newLastProductId = lastProductIds[newPage - 2];
 
             const newQuery = {
                 ...currentQuery,
                 page: newPage,
+                lastProductId: newLastProductId
             }
 
             const queryString = new URLSearchParams(newQuery).toString();
