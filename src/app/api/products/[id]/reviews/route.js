@@ -1,4 +1,4 @@
-import { getFirestore, doc, updateDoc, arrayUnion,arrayRemove } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc, arrayUnion,arrayRemove } from "firebase/firestore";
 import { app } from "@/firebaseConfig";
 
 const db = getFirestore(app);
@@ -45,6 +45,8 @@ export async function PUT(req, { params }) {
     const { id } = params; // Get product ID from URL params
     const { reviewId, comment, rating, date } = await req.json(); // Parse the incoming request body
 
+    console.log('put',reviewId)
+
     const paddedId = id.toString().padStart(3, "0");
 
     try {
@@ -87,8 +89,10 @@ export async function DELETE(req, { params }) {
     const { id } = params; // Get product ID from URL params
     const { reviewId } = await req.json(); // Parse the incoming request body
 
+    console.log(reviewId)
     const paddedId = id.toString().padStart(3, "0");
 
+    console.log('paddied', paddedId)
     try {
       // Reference to the specific product document in Firestore
         const productRef = doc(db, "products", paddedId);
@@ -96,10 +100,19 @@ export async function DELETE(req, { params }) {
       // Fetch the product to get its current reviews
         const productSnapshot = await getDoc(productRef);
         const productData = productSnapshot.data();
+        console.log('data', productData)
         const reviews = productData.reviews || [];
+        console.log(reviews)
 
-      // Find the review to remove by its ID
-        const reviewToRemove = reviews.find((review) => review.id === reviewId);
+      // Ensure reviewId is within valid bounds
+        if (reviewId < 0 || reviewId >= reviews.length) {
+            return new Response(JSON.stringify({ error: "Review not found" }), {
+                status: 400,
+            });
+        }
+
+        // Find the review to remove by its index (reviewId)
+        const reviewToRemove = reviews[reviewId];
 
       // Remove the review from the product's reviews array
         await updateDoc(productRef, {
