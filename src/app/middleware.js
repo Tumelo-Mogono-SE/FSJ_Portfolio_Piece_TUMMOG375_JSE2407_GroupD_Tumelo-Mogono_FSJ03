@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAuth } from 'firebase-admin/auth';
-import { initializeApp } from 'firebase-admin/app';
+import { initializeApp, cert } from 'firebase-admin/app';
 
 /**
  * Firebase Admin SDK configuration for initializing Firebase services.
@@ -23,6 +23,7 @@ const firebaseAdminConfig = {
 if (!initializeApp.apps?.length) {
     initializeApp(firebaseAdminConfig);
 }
+
 
 /**
  * Middleware function to verify the user's authentication token from cookies.
