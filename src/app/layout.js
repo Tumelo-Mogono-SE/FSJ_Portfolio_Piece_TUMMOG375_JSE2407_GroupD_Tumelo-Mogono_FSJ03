@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import { AuthProvider } from "./context/authContext";
+import PWAInstallPrompt from "@/components/PWAInstallation";
 
 
 const geistSans = localFont({
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <PWAInstallPrompt />
         <AuthProvider>
           <NavBar />
           <main>
