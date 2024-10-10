@@ -27,7 +27,9 @@ export async function fetchProducts ({limit = 20, lastProductId, category, sortB
             throw new Error('Failed to fetch products')
         }
 
-        const data = await response.json()
+        const data = await response.json();
+
+    
         return data;
     } catch(error){
         return error
