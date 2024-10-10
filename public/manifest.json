@@ -5,17 +5,47 @@
     "start_url": "/",
     "display": "standalone",
     "background_color": "rgb(203 213 225)",
-    "theme_color": "#4A90E2",
+    "theme_color": "rgb(203, 213, 225)",
     "icons": [
         {
-            "src": "/icon-192x192.png",
-            "sizes": "192x192",
+            "src": "/icons/android-icon-36x36.png",
+            "sizes": "36x36",
             "type": "image/png"
-        },
-        {
-            "src": "/icon-512x512.png",
-            "sizes": "512x512",
+          },
+          {
+            "src": "/icons/android-icon-48x48.png",
+            "sizes": "48x48",
             "type": "image/png"
-        }
+          },
+          {
+            "src": "/icons/apple-icon-57x57.png",
+            "sizes": "57x57",
+            "type": "image/png"
+          },
+          {
+            "src": "/icons/apple-icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+          },
+          {
+            "src": "/icons/apple-icon-114x114.png",
+            "sizes": "114x114",
+            "type": "image/png"
+          },
+          {
+            "src": "/icons/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+          },
+          {
+            "src": "/icons/ms-icon-70x70.png",
+            "sizes": "70x70",
+            "type": "image/png"
+          },
+          {
+            "src": "/icons/ms-icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+          }
     ]
 }
