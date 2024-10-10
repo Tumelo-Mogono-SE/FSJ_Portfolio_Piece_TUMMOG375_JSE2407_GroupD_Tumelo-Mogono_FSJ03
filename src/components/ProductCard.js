@@ -50,7 +50,7 @@ export function ProductCard({ id, title, images, price, rating, category }) {
 
     return (
         <Link href={`/products/${id}`}>
-            <div className="max-w-xs w-80 bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
+            <div className="max-w-xs w-full min-w-fit bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
             {/* Image Container */}
                 <div className="w-full h-52 bg-gray-200 flex items-center justify-center">
                     {productImage.length > 1 ? ( 

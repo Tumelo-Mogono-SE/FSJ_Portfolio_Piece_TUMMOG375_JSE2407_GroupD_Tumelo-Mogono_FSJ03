@@ -157,7 +157,7 @@ export default async function Home({ searchParams }) {
           <div className="grid lg:flex  lg:items-start  mt-3 mx-auto justify-center">
             <Searchbar />
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mx-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mx-4">
             <SortDropdown />
             <Filter categories={categories} selectedCategory={selectedCategory} />
           </div>
@@ -172,7 +172,7 @@ export default async function Home({ searchParams }) {
         </div>
 
         {/* Product Grid */}
-        <div className="lg: max-w-xl mx-4 grid gap-4 grid-cols-1 lg:grid-cols-4 md:gap-4 md:grid-cols-2 md:mx-1 items-center lg:max-w-none my-4">
+        <div className="lg: max-w-xl mx-4 grid gap-4 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 md:mx-1 items-center lg:max-w-none my-4">
           {products.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
